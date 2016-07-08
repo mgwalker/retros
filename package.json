@@ -1,0 +1,16 @@
+{
+  "name": "retros",
+  "version": "1.0.0",
+  "description": "Retrospectives!",
+  "main": "main.js",
+  "keywords": [
+    "retro",
+    "agile"
+  ],
+  "author": "Greg Walker <mgwalker@gmail.com>",
+  "license": "Public Domain",
+  "repository": {
+    "type": "git",
+    "url": "mgwalker/retros"
+  }
+}
