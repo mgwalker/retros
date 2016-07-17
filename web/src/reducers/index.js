@@ -3,12 +3,12 @@ import { routerReducer } from 'react-router-redux';
 
 import activity, { DefaultState as activityDefaultState } from './activity';
 import retro, { DefaultState as retroDefaultState } from './retro';
-import owner from './owner';
+import owner, { DefaultState as ownerDefaultState } from './owner';
 
 const stateShape = {
   activity: activityDefaultState,
   retro: retroDefaultState,
-  owner: false
+  owner: ownerDefaultState
 };
 
 const distinctReducers = combineReducers({

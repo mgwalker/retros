@@ -1,8 +1,9 @@
 import { Owner } from '../actions';
 
-export default function (state = false, action) {
+export const DefaultState = false;
+
+export default function (state = DefaultState, action) {
   if (action.type === Owner.Become) {
-    console.log('becoming owner!!!');
     return true;
   }
   return state;

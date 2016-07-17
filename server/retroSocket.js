@@ -18,10 +18,9 @@ class RetroSocket {
     this.clients.push(client);
 
     socket.on('take ownership', secret => {
-      console.log(`requested to take ownership with secret: ${secret}`);
       if (secret === this.secret) {
-        console.log('Got a new owner');
         this.clients.forEach(c => { c.owner = (c.socket === socket); }); // eslint-disable-line no-param-reassign
+        socket.emit('you are owner');
       }
     });
   }
