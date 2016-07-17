@@ -9,7 +9,7 @@ const uuid = require('uuid');
 const server = restify.createServer({
   name: 'Restrospectives'
 });
-const io = require('socket.io')(server);
+const io = require('socket.io')(server.server);
 
 io.on('connection', socket => {
   socket.on('create retro', msg => {
