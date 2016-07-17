@@ -1,5 +1,7 @@
-const socket = io(); /* global io */
-console.log('yay');
-console.log(socket);
+let socket = io(); /* global io */
 
-export default socket;
+socket.on('join channel', msg => {
+  socket = io(`/${msg.channel}`);
+});
+
+export default () => socket;

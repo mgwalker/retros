@@ -11,7 +11,7 @@ export default function (state = DefaultState, action) {
     case Activity.CreateRetro:
       {
         const wholeState = store.getState();
-        socket.emit('create retro', {
+        socket().emit('create retro', {
           categories: wholeState.retro.categories,
           categoryTimes: wholeState.retro.categoryTimes,
           happinessEnabled: wholeState.retro.happinessEnabled

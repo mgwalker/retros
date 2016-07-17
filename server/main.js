@@ -2,6 +2,8 @@
 
 const PORT = 23526;
 const restify = require('restify');
+const shortid = require('shortid');
+const uuid = require('uuid');
 // const messages = require('./messages');
 
 const server = restify.createServer({
@@ -9,24 +11,18 @@ const server = restify.createServer({
 });
 const io = require('socket.io')(server);
 
-io // .of('acqstack 101')
-  .on('connection', socket => {
-    console.log('got acqstack conn');
-    socket.on('create retro', msg => {
-      console.log(msg);
-    });
-  });
-
-/*
 io.on('connection', socket => {
-  console.log('>> got socket connection');
-  socket.emit('identify yourself');
-  socket.on(messages.signUp, data => {
-    console.log(':: got socket event');
-    console.log(data);
+  socket.on('create retro', msg => {
+    const channel = shortid.generate();
+    const secret = uuid.v4();
+    socket.emit('join channel', { channel, secret });
+    io.of(`/${channel}`)
+      .on('connection', () => {
+        console.log('yay, switched over to the retro channel!');
+      });
+    console.log(msg);
   });
 });
-*/
 
 server.get('/.*', restify.serveStatic({
   directory: 'web/bin',
