@@ -3,8 +3,9 @@ import updeep from 'updeep';
 
 export const DefaultState = {
   categories: [],
-  totalTime: '5',
   categoryTimes: {},
+  happinessEnabled: false,
+  totalTime: '5',
   minimumTime: 1
 };
 
@@ -80,6 +81,9 @@ export default function (state = DefaultState, action) {
         const newState = updeep(update, state);
         return updeep({ totalTime: String(getTotalTime(newState.categoryTimes)) }, newState);
       }
+    case Retro.EnableHappiness:
+      console.log(action);
+      return updeep({ happinessEnabled: action.value }, state);
     default:
       return state;
   }

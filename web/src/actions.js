@@ -7,20 +7,10 @@ export const Owner = {
 };
 
 export const Activity = {
-  CreateRetro: 'create the retro',
-  GetRetroProperties: 'get retro properties',
-  AcceptRetroProperties: 'accept retro properties',
+  CreateRetro: 'send retro metadata to server',
 
   createRetro() {
     return { type: Activity.CreateRetro };
-  },
-
-  getRetroProperties() {
-    return { type: Activity.GetRetroProperties };
-  },
-
-  acceptRetroProperties() {
-    return { type: Activity.AcceptRetroProperties };
   }
 };
 
@@ -29,6 +19,7 @@ export const Retro = {
   SetTotalTime: 'set the retro total time',
   SetCategorySelfTime: 'set a retro category self time',
   SetCategoryVoteTime: 'set a retro category vote time',
+  EnableHappiness: 'set whether happiness is enabled for a retro',
 
   setRetroCategories(retroCategories) {
     return { type: Retro.SetRetroCategories, value: retroCategories };
@@ -44,5 +35,9 @@ export const Retro = {
 
   setCategoryVoteTime(category, time) {
     return { type: Retro.SetCategoryVoteTime, value: { category, time } };
+  },
+
+  setHappiness(enabled) {
+    return { type: Retro.EnableHappiness, value: enabled };
   }
 };

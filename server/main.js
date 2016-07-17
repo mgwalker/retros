@@ -9,9 +9,12 @@ const server = restify.createServer({
 });
 const io = require('socket.io')(server);
 
-io.of('acqstack 101')
-  .on('connection', () => {
+io // .of('acqstack 101')
+  .on('connection', socket => {
     console.log('got acqstack conn');
+    socket.on('create retro', msg => {
+      console.log(msg);
+    });
   });
 
 /*

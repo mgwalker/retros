@@ -1,6 +1,6 @@
 import React from 'react';
 
-function getRetroHappiness() {
+function enableRetroHappiness(props) {
   return (
     <div>
       <h1>Check Happiness?</h1>
@@ -35,10 +35,15 @@ function getRetroHappiness() {
       <div className="usa-grid">
         <h2>Do you want to include the happiness meter in your retro?</h2>
 
-        <button className="usa-button-big">Yes</button> <button className="usa-button-secondary usa-button-big">No</button>
+        <button className="usa-button-big" onClick={props.clickHandler(true)}>Yes</button>
+        <button className="usa-button-secondary usa-button-big" onClick={props.clickHandler(false)}>No</button>
       </div>
     </div>
   );
 }
 
-export default getRetroHappiness;
+enableRetroHappiness.propTypes = {
+  clickHandler: React.PropTypes.func.isRequired
+};
+
+export default enableRetroHappiness;

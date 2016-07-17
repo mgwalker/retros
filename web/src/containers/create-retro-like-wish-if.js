@@ -12,7 +12,6 @@ function mapDispatchToProps(dispatch) {
   return {
     launch() {
       dispatch(Retro.setRetroCategories(['I Like', 'I wish', 'What If']));
-      // dispatch(Activity.getRetroProperties());
       hashHistory.push('/set-retro-properties');
     }
   };

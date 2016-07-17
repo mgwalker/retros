@@ -1,3 +1,4 @@
 node_modules
 web/bin/img
 web/bin/fonts
+npm-debug.log
