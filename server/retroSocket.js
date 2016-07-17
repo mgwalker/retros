@@ -14,7 +14,7 @@ class RetroSocket {
   }
 
   handleConnection(socket) {
-    const client = new RetroClient(socket);
+    const client = new RetroClient(socket, this.ioChannel.emit);
     this.clients.push(client);
 
     socket.on('take ownership', secret => {

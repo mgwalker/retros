@@ -1,12 +1,16 @@
 import { Retro } from '../actions';
 import updeep from 'updeep';
+import socket from '../socket';
 
 export const DefaultState = {
+  channel: '',
   categories: [],
   categoryTimes: {},
   happinessEnabled: false,
   totalTime: '5',
-  minimumTime: 1
+  minimumTime: 1,
+  username: '',
+  users: []
 };
 
 function getCategoryTimes(totalTime, categories) {
@@ -25,7 +29,6 @@ function getCategoryTimes(totalTime, categories) {
 function getTotalTime(categoryTimes) {
   let total = 0;
   Object.keys(categoryTimes).forEach(c => {
-    console.log(categoryTimes[c]);
     total += Number(categoryTimes[c].selfTime) + Number(categoryTimes[c].voteTime);
   });
   return Math.round(100 * total) / 100;
@@ -40,6 +43,7 @@ export default function (state = DefaultState, action) {
         return updeep({ totalTime, minimumTime, categories: action.value, categoryTimes: getCategoryTimes(totalTime, action.value) }, state);
       }
       return state;
+
     case Retro.SetTotalTime:
       {
         let totalTime = state.totalTime;
@@ -51,6 +55,7 @@ export default function (state = DefaultState, action) {
         }
         return updeep({ totalTime, categoryTimes: getCategoryTimes(totalTime, state.categories) }, state);
       }
+
     case Retro.SetCategorySelfTime:
       {
         let selfTime = state.categoryTimes[action.value.category].selfTime;
@@ -66,6 +71,7 @@ export default function (state = DefaultState, action) {
         const newState = updeep(update, state);
         return updeep({ totalTime: String(getTotalTime(newState.categoryTimes)) }, newState);
       }
+
     case Retro.SetCategoryVoteTime:
       {
         let voteTime = state.categoryTimes[action.value.category].voteTime;
@@ -81,9 +87,23 @@ export default function (state = DefaultState, action) {
         const newState = updeep(update, state);
         return updeep({ totalTime: String(getTotalTime(newState.categoryTimes)) }, newState);
       }
+
     case Retro.EnableHappiness:
-      console.log(action);
       return updeep({ happinessEnabled: action.value }, state);
+
+    case Retro.SetUsername:
+      console.log('gonna set my username');
+      console.log(socket());
+      socket().emit('set username', action.value);
+      return updeep({ username: action.value }, state);
+
+    case Retro.AddUser:
+      {
+        const users = [].concat(state.users);
+        users.push(action.value);
+        return updeep({ users }, state);
+      }
+
     default:
       return state;
   }

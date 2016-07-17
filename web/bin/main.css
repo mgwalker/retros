@@ -2359,6 +2359,14 @@ h1, h2, h3, h4, h5, h6 {
   .set-retro-category-time > h3 {
     margin: 0; }
 
+.retro-owner-block {
+  background-color: #e1f3f8;
+  border: 1px solid #046b99;
+  border-radius: 0.5em;
+  padding: 1em; }
+  .retro-owner-block .btn {
+    text-align: right; }
+
 .happiness-meter > button {
   padding: 1em;
   font-size: 1.4em;

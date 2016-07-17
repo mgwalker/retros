@@ -20,6 +20,8 @@ export const Retro = {
   SetCategorySelfTime: 'set a retro category self time',
   SetCategoryVoteTime: 'set a retro category vote time',
   EnableHappiness: 'set whether happiness is enabled for a retro',
+  SetUsername: 'set username of retro user',
+  AddUser: 'add user to retro',
 
   setRetroCategories(retroCategories) {
     return { type: Retro.SetRetroCategories, value: retroCategories };
@@ -39,5 +41,13 @@ export const Retro = {
 
   setHappiness(enabled) {
     return { type: Retro.EnableHappiness, value: enabled };
+  },
+
+  setUsername(name) {
+    return { type: Retro.SetUsername, value: name };
+  },
+
+  addUser(name) {
+    return { type: Retro.AddUser, value: name };
   }
 };
