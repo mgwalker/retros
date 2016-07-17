@@ -4,6 +4,7 @@ const PORT = 23526;
 const restify = require('restify');
 const shortid = require('shortid');
 const uuid = require('uuid');
+const RetroSocket = require('./retroSocket');
 // const messages = require('./messages');
 
 const server = restify.createServer({
@@ -15,11 +16,11 @@ io.on('connection', socket => {
   socket.on('create retro', msg => {
     const channel = shortid.generate();
     const secret = uuid.v4();
+    const retro = new RetroSocket(channel, secret);
+
+    retro.createChannel(io);
     socket.emit('join channel', { channel, secret });
-    io.of(`/${channel}`)
-      .on('connection', () => {
-        console.log('yay, switched over to the retro channel!');
-      });
+
     console.log(msg);
   });
 });
