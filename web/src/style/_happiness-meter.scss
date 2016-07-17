@@ -1,0 +1,49 @@
+.happiness-meter {
+  > button {
+    padding: 1em;
+    font-size: 1.4em;
+    color: white;
+
+    $colorChange: 10%;
+
+    &.happiness-meter-sad {
+      background-color: $color-secondary-darkest;
+
+      &:hover {
+        background-color: lighten($color-secondary-darkest, $colorChange);
+      }
+
+      &:active {
+        background-color: darken($color-secondary-darkest, $colorChange);
+      }
+    }
+
+    &.happiness-meter-neutral {
+      background-color: $color-primary-darker;
+
+      &:hover {
+        background-color: lighten($color-primary-darker, $colorChange);
+      }
+
+      &:active {
+        background-color: darken($color-primary-darker, $colorChange);
+      }
+    }
+
+    &.happiness-meter-happy {
+      background-color: $color-green;
+
+      &:hover {
+        background-color: lighten($color-green, $colorChange);
+      }
+
+      &:active {
+        background-color: darken($color-green, $colorChange);
+      }
+    }
+
+    > span {
+      font-size: 120px;
+    }
+  }
+}

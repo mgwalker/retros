@@ -2358,3 +2358,32 @@ h1, h2, h3, h4, h5, h6 {
   padding: 2rem; }
   .set-retro-category-time > h3 {
     margin: 0; }
+
+.happiness-meter > button {
+  padding: 1em;
+  font-size: 1.4em;
+  color: white; }
+  .happiness-meter > button.happiness-meter-sad {
+    background-color: #981b1e; }
+    .happiness-meter > button.happiness-meter-sad:hover {
+      background-color: #c32327; }
+    .happiness-meter > button.happiness-meter-sad:active {
+      background-color: #6d1315; }
+  .happiness-meter > button.happiness-meter-neutral {
+    background-color: #205493; }
+    .happiness-meter > button.happiness-meter-neutral:hover {
+      background-color: #296cbd; }
+    .happiness-meter > button.happiness-meter-neutral:active {
+      background-color: #173c69; }
+  .happiness-meter > button.happiness-meter-happy {
+    background-color: #2e8540; }
+    .happiness-meter > button.happiness-meter-happy:hover {
+      background-color: #3bab52; }
+    .happiness-meter > button.happiness-meter-happy:active {
+      background-color: #215f2e; }
+  .happiness-meter > button > span {
+    font-size: 120px; }
+
+.enable-retro-happiness-prompt .happiness-meter {
+  border: 1px solid black;
+  padding: 1em; }

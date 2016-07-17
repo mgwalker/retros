@@ -1,8 +1,10 @@
 import React from 'react';
 
+import HappinessMeter from './happiness-meter';
+
 function enableRetroHappiness(props) {
   return (
-    <div>
+    <div className="enable-retro-happiness-prompt">
       <h1>Check Happiness?</h1>
 
       <div className="usa-grid">
@@ -15,22 +17,7 @@ function enableRetroHappiness(props) {
         </p>
       </div>
 
-      <div className="usa-grid" style={{ border: '1px solid black' }}>
-        <div className="usa-width-one-third" style={{ textAlign: 'center' }}>
-          <span style={{ fontSize: '120px' }}>☹️</span><br />
-          Not feeling that great.
-        </div>
-
-        <div className="usa-width-one-third" style={{ textAlign: 'center' }}>
-          <span style={{ fontSize: '120px' }}>😐</span><br />
-          Doing okay. Nothing major to report.
-        </div>
-
-        <div className="usa-width-one-third" style={{ textAlign: 'center' }}>
-          <span style={{ fontSize: '120px' }}>😃</span><br />
-          Feeling good about it!
-        </div>
-      </div>
+      <HappinessMeter />
 
       <div className="usa-grid">
         <h2>Do you want to include the happiness meter in your retro?</h2>
