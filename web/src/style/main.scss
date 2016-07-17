@@ -1,0 +1,15 @@
+@import 'all';
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5em 0;
+}
+
+.set-retro-category-time {
+  border: 1px solid #aaa;
+  margin: 2rem;
+  padding: 2rem;
+
+  > h3 {
+    margin: 0;
+  }
+}
