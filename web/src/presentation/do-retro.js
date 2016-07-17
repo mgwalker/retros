@@ -18,7 +18,7 @@ class DoRetro extends React.Component {
   }
 
   getOwnerBlock() {
-    if (this.props.owner || true) {
+    if (this.props.owner) {
       const url = window.location.href.substr(0, window.location.href.indexOf('?'));
       return (
         <div className="usa-grid retro-owner-block">
