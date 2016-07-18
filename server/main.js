@@ -1,6 +1,6 @@
 'use strict';
 
-const PORT = 23526;
+const PORT = process.env.PORT || 23526;
 const restify = require('restify');
 const shortid = require('shortid');
 const uuid = require('uuid');
