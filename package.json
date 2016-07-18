@@ -32,7 +32,6 @@
     "react-router-redux": "^4.0.5",
     "redux": "^3.5.2",
     "updeep": "^0.16.1",
-    "uswds": "^0.9.5",
     "watchify": "^3.7.0"
   },
   "scripts": {
@@ -50,6 +49,7 @@
     "restify": "^4.1.1",
     "shortid": "^2.2.6",
     "socket.io": "^1.4.8",
+    "uswds": "^0.9.5",
     "uuid": "^2.0.2"
   },
   "engines": {
