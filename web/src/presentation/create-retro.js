@@ -5,7 +5,7 @@ import LikeWishIf from '../containers/create-retro-like-wish-if';
 
 function CreateRetro() {
   return (
-    <div>
+    <div className="usa-grid">
       <h1>Create a Retro</h1>
       <KeepStopStart />
       <LikeWishIf />

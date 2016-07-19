@@ -4,7 +4,7 @@ import HappinessMeter from './happiness-meter';
 
 function enableRetroHappiness(props) {
   return (
-    <div className="enable-retro-happiness-prompt">
+    <div className="usa-grid enable-retro-happiness-prompt">
       <h1>Check Happiness?</h1>
 
       <div className="usa-grid">

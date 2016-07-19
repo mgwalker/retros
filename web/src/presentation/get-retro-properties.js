@@ -9,7 +9,7 @@ function displayTime(minutes) {
 
 function GetRetroProperties(props) {
   return (
-    <div>
+    <div className="usa-grid">
       <h1>Setup Retro Properties</h1>
 
       <div className="usa-grid">
