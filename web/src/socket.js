@@ -3,11 +3,18 @@ import store from './store';
 import { Owner, Retro } from './actions';
 import { hashHistory } from 'react-router';
 
+function subscribeSocketToEventHandlers(skt) {
+  skt.on('add user', username => {
+    store.dispatch(Retro.addUser(username));
+  });
+}
+
 let socket;
 
 const channelNameHash = /#\/retro\/([A-Za-z0-9-]+)/.exec(window.location.hash);
 if (channelNameHash) {
   socket = io(`/${channelNameHash[1]}`);
+  subscribeSocketToEventHandlers(socket);
 } else {
   socket = io();
 }
@@ -24,9 +31,7 @@ socket.on('join channel', msg => {
     hashHistory.push(`/retro/${msg.channel}`);
   });
 
-  socket.on('add user', username => {
-    store.dispatch(Retro.addUser(username));
-  });
+  subscribeSocketToEventHandlers(socket);
 });
 
 export default function () {

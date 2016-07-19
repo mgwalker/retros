@@ -92,8 +92,6 @@ export default function (state = DefaultState, action) {
       return updeep({ happinessEnabled: action.value }, state);
 
     case Retro.SetUsername:
-      console.log('gonna set my username');
-      console.log(socket());
       socket().emit('set username', action.value);
       return updeep({ username: action.value }, state);
 

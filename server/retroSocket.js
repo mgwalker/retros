@@ -13,8 +13,12 @@ class RetroSocket {
     this.ioChannel.on('connection', this.handleConnection.bind(this));
   }
 
+  broadcast(...args) {
+    this.ioChannel.emit(...args);
+  }
+
   handleConnection(socket) {
-    const client = new RetroClient(socket, this.ioChannel.emit);
+    const client = new RetroClient(socket, this.broadcast.bind(this));
     this.clients.push(client);
 
     socket.on('take ownership', secret => {

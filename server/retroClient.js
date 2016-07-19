@@ -13,7 +13,7 @@ class RetroClient {
 
   setName(name) {
     this.username = name;
-    this.socket.emit('add user', name);
+    this.broadcast('add user', name);
   }
 
   startRetro() {
