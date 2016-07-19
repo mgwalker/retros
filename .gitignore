@@ -1,4 +1,5 @@
 node_modules
 web/bin/img
 web/bin/fonts
+web/bin/uswds.js
 npm-debug.log

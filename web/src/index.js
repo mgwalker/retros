@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
 import store from './store';
 
-require('uswds');
 require('clipboard');
 
 import CreateRetro from './presentation/create-retro';
