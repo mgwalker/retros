@@ -21,6 +21,13 @@ class RetroSocket {
     const client = new RetroClient(socket, this.broadcast.bind(this));
     this.clients.push(client);
 
+    // Send all the existing users to the new client
+    this.clients.forEach(c => {
+      if (c.username) {
+        socket.emit('add user', c.username);
+      }
+    });
+
     socket.on('take ownership', secret => {
       if (secret === this.secret) {
         this.clients.forEach(c => { c.owner = (c.socket === socket); }); // eslint-disable-line no-param-reassign
