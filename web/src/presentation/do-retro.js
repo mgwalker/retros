@@ -27,7 +27,7 @@ class DoRetro extends React.Component {
             join: <a href={url}>{url}</a>
           </div>
           <div className="usa-width-one-half btn">
-            <button>Start the Retro</button>
+            <button onClick={this.props.onStartRetro}>Start the Retro</button>
           </div>
         </div>
       );
@@ -72,7 +72,8 @@ class DoRetro extends React.Component {
 DoRetro.propTypes = {
   owner: React.PropTypes.bool.isRequired,
   retro: React.PropTypes.object.isRequired,
-  onChangeUsername: React.PropTypes.func.isRequired
+  onChangeUsername: React.PropTypes.func.isRequired,
+  onStartRetro: React.PropTypes.func.isRequired
 };
 
 export default DoRetro;

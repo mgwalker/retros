@@ -22,6 +22,7 @@ export const Retro = {
   EnableHappiness: 'set whether happiness is enabled for a retro',
   SetUsername: 'set username of retro user',
   AddUser: 'add user to retro',
+  StartRetro: 'start the retro',
 
   setRetroCategories(retroCategories) {
     return { type: Retro.SetRetroCategories, value: retroCategories };
@@ -49,5 +50,9 @@ export const Retro = {
 
   addUser(name) {
     return { type: Retro.AddUser, value: name };
+  },
+
+  startRetro() {
+    return { type: Retro.StartRetro };
   }
 };

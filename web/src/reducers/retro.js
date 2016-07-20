@@ -102,6 +102,10 @@ export default function (state = DefaultState, action) {
         return updeep({ users }, state);
       }
 
+    case Retro.StartRetro:
+      socket().emit('start retro');
+      return state;
+
     default:
       return state;
   }

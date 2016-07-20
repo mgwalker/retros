@@ -14,6 +14,10 @@ function mapDispatchToProps(dispatch) {
   return {
     onChangeUsername(username) {
       dispatch(Retro.setUsername(username));
+    },
+
+    onStartRetro() {
+      dispatch(Retro.startRetro());
     }
   };
 }
