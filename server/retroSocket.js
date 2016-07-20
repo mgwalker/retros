@@ -1,20 +1,27 @@
 const RetroClient = require('./retroClient');
+const RetroRunner = require('./retroRunner');
 
 class RetroSocket {
-  constructor(channel, secret) {
+  constructor(retroMetadata, channel, secret) {
     this.ioChannel = null;
     this.channel = channel;
     this.secret = secret;
     this.clients = [];
+    this.retroMetadata = retroMetadata;
   }
 
   createChannel(io) {
     this.ioChannel = io.of(this.channel);
     this.ioChannel.on('connection', this.handleConnection.bind(this));
+    this.retroRunner = new RetroRunner(this.ioChannel, this.retroMetadata);
   }
 
   broadcast(...args) {
     this.ioChannel.emit(...args);
+  }
+
+  startTheRetro() {
+    this.retroRunner.run();
   }
 
   handleConnection(socket) {
@@ -25,6 +32,12 @@ class RetroSocket {
     this.clients.forEach(c => {
       if (c.username) {
         socket.emit('add user', c.username);
+      }
+    });
+
+    socket.on('start retro', () => {
+      if (this.clients.some(c => c.socket === socket && c.owner)) {
+        this.startTheRetro();
       }
     });
 

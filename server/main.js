@@ -16,7 +16,7 @@ io.on('connection', socket => {
   socket.on('create retro', msg => {
     const channel = shortid.generate();
     const secret = uuid.v4();
-    const retro = new RetroSocket(channel, secret);
+    const retro = new RetroSocket(msg, channel, secret);
 
     retro.createChannel(io);
     socket.emit('join channel', { channel, secret });
