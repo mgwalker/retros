@@ -8,9 +8,29 @@ export const Owner = {
 
 export const Activity = {
   CreateRetro: 'send retro metadata to server',
+  StartRetro: 'starting the retro',
+  StartPolling: 'polling on a category',
+  StartVoting: 'voting on a category',
+  TimeWarning: 'almost out of time',
 
   createRetro() {
     return { type: Activity.CreateRetro };
+  },
+
+  startRetro() {
+    return { type: Activity.StartRetro };
+  },
+
+  startPolling(category) {
+    return { type: Activity.StartPolling, value: category };
+  },
+
+  startVoting(category, entries) {
+    return { type: Activity.StartVoting, value: { category, entries } };
+  },
+
+  timeWarning(duration) {
+    return { type: Activity.TimeWarning, value: duration };
   }
 };
 

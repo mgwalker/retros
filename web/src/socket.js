@@ -1,11 +1,30 @@
 /* global io */
 import store from './store';
-import { Owner, Retro } from './actions';
+import { Activity, Owner, Retro } from './actions';
 import { hashHistory } from 'react-router';
 
 function subscribeSocketToEventHandlers(skt) {
   skt.on('add user', username => {
     store.dispatch(Retro.addUser(username));
+  });
+
+  skt.on('starting retro', () => {
+    store.dispatch(Activity.startRetro());
+  });
+
+  skt.on('polling', category => {
+    console.log(`Polling for ${category}`);
+    store.dispatch(Activity.startPolling(category));
+  });
+
+  skt.on('voting', msg => {
+    console.log(`Voting for ${msg.category}`);
+    store.dispatch(Activity.startVoting(msg.category, msg.entries));
+  });
+
+  skt.on('10 second warning', () => {
+    console.log('10-second warning!');
+    store.dispatch(Activity.timeWarning(10));
   });
 }
 
