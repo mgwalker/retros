@@ -12,6 +12,7 @@ export const Activity = {
   StartPolling: 'polling on a category',
   StartVoting: 'voting on a category',
   TimeWarning: 'almost out of time',
+  SetPollEntry: 'set poll entry',
 
   createRetro() {
     return { type: Activity.CreateRetro };
@@ -31,6 +32,10 @@ export const Activity = {
 
   timeWarning(duration) {
     return { type: Activity.TimeWarning, value: duration };
+  },
+
+  setPollEntry(index, value) {
+    return { type: Activity.SetPollEntry, value: { index, value } };
   }
 };
 
