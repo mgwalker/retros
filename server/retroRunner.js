@@ -6,6 +6,8 @@ class RetroRunner {
     this.retro = retroMetadata;
     this.categoryIndex = 0;
     this.voting = false;
+
+    this.answers = [];
   }
 
   run() {
@@ -44,7 +46,7 @@ class RetroRunner {
 
   startVoting(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit(messages.retro.voting, { category, entries: [] });
+    this.socket.emit(messages.retro.voting, { category, entries: this.answers });
     console.log(`Voting: ${category}`);
     setTimeout(() => this.tenSecondWarning(), delays.vote - 10000);
     setTimeout(() => this.collectVotes(), delays.vote);
@@ -69,6 +71,19 @@ class RetroRunner {
     } else {
       console.log('All done!');
     }
+  }
+
+  mergeAnswers(clientAnswers) {
+    this.answers = this.answers.concat(clientAnswers.filter(a => !!a));
+    for (let i = 0; i < this.answers.length; i++) {
+      const target = this.answers.length - 1 - i;
+      const swap = Math.floor(Math.random() * (this.answers.length));
+      const temp = this.answers[target];
+      this.answers[target] = this.answers[swap];
+      this.answers[swap] = temp;
+    }
+    console.log('merged answers');
+    console.log(this.answers);
   }
 }
 

@@ -10,6 +10,9 @@ class RetroClient {
     socket.on(messages.action.setUsername, this.setName.bind(this));
     socket.on(messages.action.startRetro, this.startRetro.bind(this));
 
+    socket.on(messages.retro.submitAnswers, this.submitAnswers.bind(this));
+    socket.on(messages.retro.submitVotes, this.submitVotes.bind(this));
+
     socket.emit(messages.action.waitForStart);
     this.broadcast = broadcast;
   }
@@ -23,6 +26,15 @@ class RetroClient {
     if (this.owner) {
       this.retroRunner.run();
     }
+  }
+
+  submitAnswers(answers) {
+    this.retroRunner.mergeAnswers(answers);
+  }
+
+  submitVotes(votes) {
+    console.log('Got votes from the client:');
+    console.log(votes);
   }
 }
 

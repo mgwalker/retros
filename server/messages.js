@@ -13,8 +13,10 @@ module.exports = Object.freeze({
     starting: 'starting retro',
     polling: 'polling',
     collectAnswers: 'collect answers',
+    submitAnswers: 'submit answers',
     voting: 'voting',
     collectVotes: 'collect votes',
+    submitVotes: 'submit votes',
     tenSecondWarning: '10-second warning'
   })
 });

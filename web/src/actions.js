@@ -13,6 +13,8 @@ export const Activity = {
   StartVoting: 'voting on a category',
   TimeWarning: 'almost out of time',
   SetPollEntry: 'set poll entry',
+  CollectAnswers: 'collect answers',
+  CollectVotes: 'collect votes',
 
   createRetro() {
     return { type: Activity.CreateRetro };
@@ -36,6 +38,14 @@ export const Activity = {
 
   setPollEntry(index, value) {
     return { type: Activity.SetPollEntry, value: { index, value } };
+  },
+
+  collectAnswers() {
+    return { type: Activity.CollectAnswers };
+  },
+
+  collectVotes() {
+    return { type: Activity.CollectVotes };
   }
 };
 

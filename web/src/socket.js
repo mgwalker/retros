@@ -38,6 +38,14 @@ function subscribeSocketToEventHandlers(skt) {
       }
     }, 250);
   });
+
+  skt.on(socketMessages.retro.collectAnswers, () => {
+    store.dispatch(Activity.collectAnswers());
+  });
+
+  skt.on(socketMessages.retro.collectVotes, () => {
+    store.dispatch(Activity.collectVotes());
+  });
 }
 
 let socket;

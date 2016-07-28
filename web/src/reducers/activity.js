@@ -68,6 +68,13 @@ export default function (state = DefaultState, action) {
         return updeep({ entries: newEntries }, state);
       }
 
+    case Activity.CollectAnswers:
+      socket().emit(messages.retro.submitAnswers, state.entries);
+      return state;
+
+    case Activity.CollectVotes:
+      return state;
+
     default:
       return state;
   }
