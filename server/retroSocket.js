@@ -1,5 +1,6 @@
 const RetroClient = require('./retroClient');
 const RetroRunner = require('./retroRunner');
+const messages = require('./messages');
 
 class RetroSocket {
   constructor(retroMetadata, channel, secret) {
@@ -31,20 +32,20 @@ class RetroSocket {
     // Send all the existing users to the new client
     this.clients.forEach(c => {
       if (c.username) {
-        socket.emit('add user', c.username);
+        socket.emit(messages.action.addUser, c.username);
       }
     });
 
-    socket.on('start retro', () => {
+    socket.on(messages.action.startRetro, () => {
       if (this.clients.some(c => c.socket === socket && c.owner)) {
         this.startTheRetro();
       }
     });
 
-    socket.on('take ownership', secret => {
+    socket.on(messages.action.takeOwnership, secret => {
       if (secret === this.secret) {
         this.clients.forEach(c => { c.owner = (c.socket === socket); }); // eslint-disable-line no-param-reassign
-        socket.emit('you are owner');
+        socket.emit(messages.action.announceOwnership);
       }
     });
   }

@@ -1,3 +1,5 @@
+const messages = require('./messages');
+
 class RetroRunner {
   constructor(socket, retroMetadata) {
     this.socket = socket;
@@ -7,7 +9,7 @@ class RetroRunner {
   }
 
   run() {
-    this.socket.emit('starting retro', 10);
+    this.socket.emit(messages.retro.starting, 10);
     this.categoryIndex = 0;
     this.voting = false;
     setTimeout(() => { this.startPolling(this.getDelays()); }, 10000);
@@ -27,7 +29,7 @@ class RetroRunner {
 
   startPolling(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit('polling', category);
+    this.socket.emit(messages.retro.polling, category);
     console.log(`Polling: ${category}`);
     setTimeout(() => this.tenSecondWarning(), delays.poll - 10000);
     setTimeout(() => this.collectAnswers(delays), delays.poll);
@@ -35,14 +37,14 @@ class RetroRunner {
 
   collectAnswers(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit('collect answers', category);
+    this.socket.emit(messages.retro.collectAnswers, category);
     console.log(`Collecting answers: ${category}`);
     setTimeout(() => this.startVoting(delays), 3000);
   }
 
   startVoting(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit('voting', { category, entries: [] });
+    this.socket.emit(messages.retro.voting, { category, entries: [] });
     console.log(`Voting: ${category}`);
     setTimeout(() => this.tenSecondWarning(), delays.vote - 10000);
     setTimeout(() => this.collectVotes(), delays.vote);
@@ -50,13 +52,13 @@ class RetroRunner {
 
   collectVotes() {
     const category = this.getCurrentCategory();
-    this.socket.emit('collect votes', category);
+    this.socket.emit(messages.retro.collectVotes, category);
     console.log(`Collecting votes: ${category}`);
     setTimeout(() => this.nextCategory(), 3000);
   }
 
   tenSecondWarning() {
-    this.socket.emit('10 second warning');
+    this.socket.emit(messages.retro.tenSecondWarning);
     console.log('10-second warning');
   }
 

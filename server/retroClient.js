@@ -1,19 +1,21 @@
+const messages = require('./messages');
+
 class RetroClient {
   constructor(socket, broadcast) {
     this.socket = socket;
     this.owner = false;
     this.username = '';
 
-    socket.on('set username', this.setName.bind(this));
-    socket.on('start retro', this.startRetro.bind(this));
+    socket.on(messages.action.setUsername, this.setName.bind(this));
+    socket.on(messages.action.startRetro, this.startRetro.bind(this));
 
-    socket.emit('wait for start');
+    socket.emit(messages.action.waitForStart);
     this.broadcast = broadcast;
   }
 
   setName(name) {
     this.username = name;
-    this.broadcast('add user', name);
+    this.broadcast(messages.action.addUser, name);
   }
 
   startRetro() {
