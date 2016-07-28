@@ -25,7 +25,18 @@ function subscribeSocketToEventHandlers(skt) {
 
   skt.on(socketMessages.retro.tenSecondWarning, () => {
     console.log('10-second warning!');
-    store.dispatch(Activity.timeWarning(10));
+    const warningTime = 10;
+    store.dispatch(Activity.timeWarning(warningTime));
+
+    const timerStart = new Date();
+    const countdown = setInterval(() => {
+      const elapsed = Math.round(((new Date()) - timerStart) / 1000);
+      if (elapsed < 10) {
+        store.dispatch(Activity.timeWarning(warningTime - elapsed));
+      } else {
+        clearInterval(countdown);
+      }
+    }, 250);
   });
 }
 
