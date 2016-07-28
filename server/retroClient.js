@@ -1,10 +1,11 @@
 const messages = require('./messages');
 
 class RetroClient {
-  constructor(socket, broadcast) {
+  constructor(socket, broadcast, retroRunner) {
     this.socket = socket;
     this.owner = false;
     this.username = '';
+    this.retroRunner = retroRunner;
 
     socket.on(messages.action.setUsername, this.setName.bind(this));
     socket.on(messages.action.startRetro, this.startRetro.bind(this));
@@ -20,9 +21,7 @@ class RetroClient {
 
   startRetro() {
     if (this.owner) {
-      console.log('Owner wants to start the retro');
-    } else {
-      console.log('You\'re not my supervisor!');
+      this.retroRunner.run();
     }
   }
 }

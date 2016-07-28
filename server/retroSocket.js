@@ -21,24 +21,14 @@ class RetroSocket {
     this.ioChannel.emit(...args);
   }
 
-  startTheRetro() {
-    this.retroRunner.run();
-  }
-
   handleConnection(socket) {
-    const client = new RetroClient(socket, this.broadcast.bind(this));
+    const client = new RetroClient(socket, this.broadcast.bind(this), this.retroRunner);
     this.clients.push(client);
 
     // Send all the existing users to the new client
     this.clients.forEach(c => {
       if (c.username) {
         socket.emit(messages.action.addUser, c.username);
-      }
-    });
-
-    socket.on(messages.action.startRetro, () => {
-      if (this.clients.some(c => c.socket === socket && c.owner)) {
-        this.startTheRetro();
       }
     });
 
