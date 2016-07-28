@@ -1,6 +1,6 @@
 import { Retro } from '../actions';
 import updeep from 'updeep';
-import socket from '../socket';
+import socket, { messages } from '../socket';
 
 export const DefaultState = {
   channel: '',
@@ -92,7 +92,7 @@ export default function (state = DefaultState, action) {
       return updeep({ happinessEnabled: action.value }, state);
 
     case Retro.SetUsername:
-      socket().emit('set username', action.value);
+      socket().emit(messages.action.setUsername, action.value);
       return updeep({ username: action.value }, state);
 
     case Retro.AddUser:
@@ -103,7 +103,7 @@ export default function (state = DefaultState, action) {
       }
 
     case Retro.StartRetro:
-      socket().emit('start retro');
+      socket().emit(messages.action.startRetro);
       return state;
 
     default:

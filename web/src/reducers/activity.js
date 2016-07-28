@@ -2,7 +2,7 @@ import updeep from 'updeep';
 import { hashHistory } from 'react-router';
 import { Activity } from '../actions';
 import store from '../store';
-import socket from '../socket';
+import socket, { messages } from '../socket';
 
 export const DefaultState = {
   timeWarning: 0,
@@ -18,7 +18,7 @@ export default function (state = DefaultState, action) {
     case Activity.CreateRetro:
       {
         const wholeState = store.getState();
-        socket().emit('create retro', {
+        socket().emit(messages.action.createRetro, {
           categories: wholeState.retro.categories,
           categoryTimes: wholeState.retro.categoryTimes,
           happinessEnabled: wholeState.retro.happinessEnabled
