@@ -83,8 +83,21 @@ class RetroRunner {
     if (this.categoryIndex < this.retro.categories.length) {
       this.startPolling(this.getDelays());
     } else {
+      this.sendResults();
       console.log('All done!');
     }
+  }
+
+  sendResults() {
+    const entries = { };
+    Object.keys(this.votes).forEach(category => {
+      entries[category] = [];
+      Object.keys(this.votes[category]).forEach(answer => {
+        entries[category].push({ name: answer, votes: this.votes[category][answer] });
+      });
+      entries[category].sort((a, b) => a.votes < b.votes);
+    });
+    this.socket.emit(messages.retro.results, entries);
   }
 
   mergeAnswers(clientAnswers) {
