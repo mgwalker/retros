@@ -20,6 +20,7 @@ class RetroRunner {
     this.voting = false;
 
     this.answers = [];
+    this.votes = { };
   }
 
   run() {
@@ -51,6 +52,7 @@ class RetroRunner {
 
   collectAnswers(delays) {
     const category = this.getCurrentCategory();
+    this.answers.length = 0;
     this.socket.emit(messages.retro.collectAnswers, category);
     console.log(`Collecting answers: ${category}`);
     setTimeout(() => this.startVoting(delays), 3000);
@@ -87,9 +89,21 @@ class RetroRunner {
 
   mergeAnswers(clientAnswers) {
     this.answers = this.answers.concat(clientAnswers.filter(a => !!a));
+  }
+
+  mergeVotes(clientVotes) {
+    const category = this.getCurrentCategory();
+    if (!this.votes[category]) {
+      this.votes[category] = { };
     }
-    console.log('merged answers');
-    console.log(this.answers);
+
+    clientVotes.forEach(item => {
+      if (!this.votes[category][item.name]) {
+        this.votes[category][item.name] = item.votes;
+      } else {
+        this.votes[category][item.name] += item.votes;
+      }
+    });
   }
 }
 

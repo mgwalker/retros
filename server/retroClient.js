@@ -33,8 +33,7 @@ class RetroClient {
   }
 
   submitVotes(votes) {
-    console.log('Got votes from the client:');
-    console.log(votes);
+    this.retroRunner.mergeVotes(votes);
   }
 }
 
