@@ -18,10 +18,31 @@ function getPollingBlock(polling, entries, editHandler) {
   return null;
 }
 
-function getVotingBlock(voting) {
+function getVotingBlock(voting, entries, voteUp, voteDown) {
   if (voting) {
+    const entriesDOM = [];
+    for (let i = 0; i < entries.length; i++) {
+      const e = entries[i];
+      entriesDOM.push(
+        <div className={`usa-grid voting-option ${e.votes ? 'hot' : ''}`} key={`voting-option-key-${i}`}>
+          <div className="usa-width-five-sixths">{e.name}</div>
+          <div className="usa-width-one-sixth buttons">
+            {e.votes}
+            <button onClick={voteUp(i)}>+</button>
+            <button onClick={voteDown(i)}>-</button>
+          </div>
+        </div>
+      );
+    }
     return (
-      <h1>Voting for {voting}</h1>
+      <div>
+        <h1>Voting for {voting}</h1>
+        <p>
+          Click an item to vote for it.  Click again to remove your vote.  You
+          may vote on up to five items.
+        </p>
+        {entriesDOM}
+      </div>
     );
   }
   return null;
@@ -38,7 +59,7 @@ function runningRetro(props) {
   return (
     <div className="usa-grid">
       {getPollingBlock(props.polling, props.entries, props.editEntry)}
-      {getVotingBlock(props.voting, props.entries)}
+      {getVotingBlock(props.voting, props.entries, props.voteUp, props.voteDown)}
       {getTimeWarningBlock(props.timeWarning)}
     </div>
   );
@@ -49,6 +70,8 @@ runningRetro.propTypes = {
   voting: React.PropTypes.string,
   entries: React.PropTypes.array,
   editEntry: React.PropTypes.func.isRequired,
+  voteUp: React.PropTypes.func.isRequired,
+  voteDown: React.PropTypes.func.isRequired,
   timeWarning: React.PropTypes.number
 };
 
