@@ -15,6 +15,8 @@ export const Activity = {
   SetPollEntry: 'set poll entry',
   CollectAnswers: 'collect answers',
   CollectVotes: 'collect votes',
+  VoteUp: 'vote up',
+  VoteDown: 'vote down',
 
   createRetro() {
     return { type: Activity.CreateRetro };
@@ -46,6 +48,14 @@ export const Activity = {
 
   collectVotes() {
     return { type: Activity.CollectVotes };
+  },
+
+  voteUp(index) {
+    return { type: Activity.VoteUp, value: index };
+  },
+
+  voteDown(index) {
+    return { type: Activity.VoteDown, value: index };
   }
 };
 

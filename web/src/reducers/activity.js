@@ -42,7 +42,7 @@ export default function (state = DefaultState, action) {
       return updeep({
         polling: '',
         voting: action.value.category,
-        entries: action.value.entries,
+        entries: action.value.entries.map(e => ({ name: e, votes: 0 })),
         timeWarning: 0
       }, state);
 
@@ -73,7 +73,27 @@ export default function (state = DefaultState, action) {
       return state;
 
     case Activity.CollectVotes:
+      socket().emit(messages.retro.submitVotes, state.entries);
       return state;
+
+    case Activity.VoteUp:
+      {
+        const totalVotes = state.entries.reduce((prev, now) => prev + now.votes, 0);
+        const node = state.entries[action.value];
+        if (totalVotes < 5 && node.votes < 5) {
+          return updeep({ entries: { [action.value]: { votes: node.votes + 1 } } }, state);
+        }
+        return state;
+      }
+
+    case Activity.VoteDown:
+      {
+        const node = state.entries[action.value];
+        if (node.votes > 0) {
+          return updeep({ entries: { [action.value]: { votes: node.votes - 1 } } }, state);
+        }
+        return state;
+      }
 
     default:
       return state;

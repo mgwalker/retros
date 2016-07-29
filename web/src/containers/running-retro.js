@@ -17,6 +17,18 @@ function mapDispatchToProps(dispatch) {
       return event => {
         dispatch(Activity.setPollEntry(index, event.target.value));
       };
+    },
+
+    voteUp(index) {
+      return () => {
+        dispatch(Activity.voteUp(index));
+      };
+    },
+
+    voteDown(index) {
+      return () => {
+        dispatch(Activity.voteDown(index));
+      };
     }
   };
 }

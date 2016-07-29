@@ -31,3 +31,19 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid black;
   padding: 1em;
 }
+
+.voting-option {
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+
+  .buttons {
+    text-align: right;
+  }
+
+  &.hot {
+    background-color: $color-green-lightest;
+  }
+}
