@@ -17,6 +17,7 @@ module.exports = Object.freeze({
     voting: 'voting',
     collectVotes: 'collect votes',
     submitVotes: 'submit votes',
-    tenSecondWarning: '10-second warning'
+    tenSecondWarning: '10-second warning',
+    results: 'results'
   })
 });
