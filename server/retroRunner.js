@@ -1,5 +1,17 @@
 const messages = require('./messages');
 
+function shuffle(list) {
+  const result = [].concat(list);
+  for (let i = 0; i < result.length; i++) {
+    const target = result.length - 1 - i;
+    const swap = Math.floor(Math.random() * (result.length));
+    const temp = result[target];
+    result[target] = result[swap];
+    result[swap] = temp;
+  }
+  return result;
+}
+
 class RetroRunner {
   constructor(socket, retroMetadata) {
     this.socket = socket;
@@ -46,7 +58,7 @@ class RetroRunner {
 
   startVoting(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit(messages.retro.voting, { category, entries: this.answers });
+    this.socket.emit(messages.retro.voting, { category, entries: shuffle(this.answers) });
     console.log(`Voting: ${category}`);
     setTimeout(() => this.tenSecondWarning(), delays.vote - 10000);
     setTimeout(() => this.collectVotes(), delays.vote);
@@ -75,12 +87,6 @@ class RetroRunner {
 
   mergeAnswers(clientAnswers) {
     this.answers = this.answers.concat(clientAnswers.filter(a => !!a));
-    for (let i = 0; i < this.answers.length; i++) {
-      const target = this.answers.length - 1 - i;
-      const swap = Math.floor(Math.random() * (this.answers.length));
-      const temp = this.answers[target];
-      this.answers[target] = this.answers[swap];
-      this.answers[swap] = temp;
     }
     console.log('merged answers');
     console.log(this.answers);
