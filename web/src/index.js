@@ -11,6 +11,7 @@ import GetRetroProperties from './containers/get-retro-properties';
 import EnableRetroHappiness from './containers/enable-retro-happiness';
 import DoRetro from './containers/do-retro';
 import RunRetro from './containers/running-retro';
+import RetroResults from './containers/retro-results';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,6 +21,7 @@ ReactDOM.render(
       <Route path="/enable-retro-happiness" component={EnableRetroHappiness} />
       <Route path="/retro/:retroName" component={DoRetro} />
       <Route path="/retro-running" component={RunRetro} />
+      <Route path="/retro-results" component={RetroResults} />
     </Router>
   </Provider>,
   document.getElementById('content')

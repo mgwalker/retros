@@ -46,6 +46,10 @@ function subscribeSocketToEventHandlers(skt) {
   skt.on(socketMessages.retro.collectVotes, () => {
     store.dispatch(Activity.collectVotes());
   });
+
+  skt.on(socketMessages.retro.results, results => {
+    store.dispatch(Activity.retroResults(results));
+  });
 }
 
 let socket;

@@ -1,4 +1,5 @@
-import { Retro } from '../actions';
+import { Retro, Activity } from '../actions';
+import { hashHistory } from 'react-router';
 import updeep from 'updeep';
 import socket, { messages } from '../socket';
 
@@ -10,7 +11,8 @@ export const DefaultState = {
   totalTime: '5',
   minimumTime: 1,
   username: '',
-  users: []
+  users: [],
+  results: { }
 };
 
 function getCategoryTimes(totalTime, categories) {
@@ -105,6 +107,10 @@ export default function (state = DefaultState, action) {
     case Retro.StartRetro:
       socket().emit(messages.action.startRetro);
       return state;
+
+    case Activity.RetroResults:
+      hashHistory.push('/retro-results');
+      return updeep({ results: action.value }, state);
 
     default:
       return state;

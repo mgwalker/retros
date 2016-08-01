@@ -17,6 +17,7 @@ export const Activity = {
   CollectVotes: 'collect votes',
   VoteUp: 'vote up',
   VoteDown: 'vote down',
+  RetroResults: 'retro results',
 
   createRetro() {
     return { type: Activity.CreateRetro };
@@ -56,6 +57,10 @@ export const Activity = {
 
   voteDown(index) {
     return { type: Activity.VoteDown, value: index };
+  },
+
+  retroResults(results) {
+    return { type: Activity.RetroResults, value: results };
   }
 };
 
