@@ -10,17 +10,17 @@ function happinessMeter(props) {
         retro period.  This is used to help gauge how the team feels overall.
       </p>
 
-      <button className="usa-width-one-third happiness-meter-sad" onClick={props.onSadClicked}>
+      <button className={`usa-width-one-third happiness-meter-sad ${props.happinessLevel === 1 ? 'selected' : ''}`} onClick={props.onSadClicked}>
         <span>☹️</span><br />
         Not feeling that great.
       </button>
 
-      <button className="usa-width-one-third happiness-meter-neutral" onClick={props.onNeutralClicked}>
+      <button className={`usa-width-one-third happiness-meter-neutral ${props.happinessLevel === 2 ? 'selected' : ''}`} onClick={props.onNeutralClicked}>
         <span>😐</span><br />
         Doing just fine for now.
       </button>
 
-      <button className="usa-width-one-third happiness-meter-happy" onClick={props.onHappyClicked}>
+      <button className={`usa-width-one-third happiness-meter-happy ${props.happinessLevel === 3 ? 'selected' : ''}`} onClick={props.onHappyClicked}>
         <span>😃</span><br />
         Feeling good about it!
       </button>
@@ -29,6 +29,7 @@ function happinessMeter(props) {
 }
 
 happinessMeter.propTypes = {
+  happinessLevel: React.PropTypes.number,
   onSadClicked: React.PropTypes.func,
   onNeutralClicked: React.PropTypes.func,
   onHappyClicked: React.PropTypes.func

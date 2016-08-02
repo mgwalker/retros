@@ -6,6 +6,12 @@
 
     $colorChange: 10%;
 
+    &.selected {
+      border: 0.2em solid #6CF;
+      box-shadow: 0 0 10px #6CF;
+      margin-top: 0.3em;
+    }
+
     &.happiness-meter-sad {
       background-color: $color-secondary-darkest;
 
