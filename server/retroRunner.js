@@ -118,7 +118,12 @@ class RetroRunner {
       });
       entries[category].sort((a, b) => a.votes < b.votes);
     });
-    this.socket.emit(messages.retro.results, entries);
+
+    const result = { entries, happinessHistogram: false };
+    if (this.retro.happinessEnabled) {
+      result.happinessHistogram = this.happiness;
+    }
+    this.socket.emit(messages.retro.results, result);
     console.log('All done!');
   }
 

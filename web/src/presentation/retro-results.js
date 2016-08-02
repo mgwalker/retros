@@ -26,17 +26,42 @@ function getResultGroup(groupName, results) {
 
 function getAllResultGroups(results) {
   const groups = [];
-  for (const name of Object.keys(results)) {
-    groups.push(getResultGroup(name, results));
+  if (typeof results !== 'undefined') {
+    for (const name of Object.keys(results)) {
+      groups.push(getResultGroup(name, results));
+    }
   }
   return groups;
+}
+
+function getHappinessHistogram(histogram) {
+  if (histogram) {
+    return (
+      <div>
+        <h3>Retro Happiness</h3>
+        <div className="usa-grid">
+          <div className="usa-width-one-third">
+            ☹️<br />{histogram[1]}
+          </div>
+          <div className="usa-width-one-third">
+            😐<br />{histogram[2]}
+          </div>
+          <div className="usa-width-one-third">
+            😃<br />{histogram[3]}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return null;
 }
 
 function retroResults(props) {
   return (
     <div className="usa-grid">
       <h1>Retro Results</h1>
-      {getAllResultGroups(props.results)}
+      {getAllResultGroups(props.results.entries)}
+      {getHappinessHistogram(props.results.happinessHistogram)}
     </div>
   );
 }
