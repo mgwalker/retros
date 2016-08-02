@@ -12,6 +12,7 @@ class RetroClient {
 
     socket.on(messages.retro.submitAnswers, this.submitAnswers.bind(this));
     socket.on(messages.retro.submitVotes, this.submitVotes.bind(this));
+    socket.on(messages.retro.submitHappiness, this.submitHappiness.bind(this));
 
     socket.emit(messages.action.waitForStart);
     this.broadcast = broadcast;
@@ -34,6 +35,10 @@ class RetroClient {
 
   submitVotes(votes) {
     this.retroRunner.mergeVotes(votes);
+  }
+
+  submitHappiness(happiness) {
+    this.retroRunner.mergeHappiness(happiness);
   }
 }
 

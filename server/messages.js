@@ -18,6 +18,9 @@ module.exports = Object.freeze({
     collectVotes: 'collect votes',
     submitVotes: 'submit votes',
     tenSecondWarning: '10-second warning',
+    happiness: 'happiness meter',
+    collectHappiness: 'collect happiness',
+    submitHappiness: 'submit happiness',
     results: 'results'
   })
 });

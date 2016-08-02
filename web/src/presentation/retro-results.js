@@ -4,7 +4,7 @@ function getResults(resultList) {
   const results = [];
   for (const result of resultList) {
     results.push(
-      <div>
+      <div key={`retro-results-${result.name}`}>
         <div className="usa-width-one-twelfth">{result.votes}</div>
         <div>{result.name}</div>
       </div>
@@ -15,7 +15,7 @@ function getResults(resultList) {
 
 function getResultGroup(groupName, results) {
   return (
-    <div>
+    <div key={`retro-result-group-${groupName}`}>
       <h2>{groupName}</h2>
       <div className="usa-grid">
         {getResults(results[groupName])}

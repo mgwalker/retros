@@ -95,6 +95,11 @@ export default function (state = DefaultState, action) {
         return state;
       }
 
+    case Activity.StartHappiness:
+      console.log('Activity.StartHappiness');
+      hashHistory.push('/retro-happiness');
+      return state;
+
     default:
       return state;
   }

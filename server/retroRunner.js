@@ -21,6 +21,11 @@ class RetroRunner {
 
     this.answers = [];
     this.votes = { };
+    this.happiness = {
+      1: 0,
+      2: 0,
+      3: 0
+    };
   }
 
   run() {
@@ -83,9 +88,25 @@ class RetroRunner {
     if (this.categoryIndex < this.retro.categories.length) {
       this.startPolling(this.getDelays());
     } else {
-      this.sendResults();
-      console.log('All done!');
+      if (this.retro.happinessEnabled) {
+        this.pollHappiness();
+      } else {
+        this.sendResults();
+      }
     }
+  }
+
+  pollHappiness() {
+    this.socket.emit(messages.retro.happiness);
+    console.log('Polling happiness');
+    this.tenSecondWarning();
+    setTimeout(() => this.collectHappiness(), 10000);
+  }
+
+  collectHappiness() {
+    this.socket.emit(messages.retro.collectHappiness);
+    console.log('Collecting happiness');
+    setTimeout(() => this.sendResults(), 3000);
   }
 
   sendResults() {
@@ -98,6 +119,7 @@ class RetroRunner {
       entries[category].sort((a, b) => a.votes < b.votes);
     });
     this.socket.emit(messages.retro.results, entries);
+    console.log('All done!');
   }
 
   mergeAnswers(clientAnswers) {
@@ -117,6 +139,14 @@ class RetroRunner {
         this.votes[category][item.name] += item.votes;
       }
     });
+  }
+
+  mergeHappiness(clientHappiness) {
+    if (typeof this.happiness[clientHappiness] !== 'undefined') {
+      this.happiness[clientHappiness]++;
+    }
+    console.log('Merged happiness: current structure is');
+    console.log(this.happiness);
   }
 }
 

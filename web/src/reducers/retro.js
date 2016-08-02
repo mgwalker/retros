@@ -12,7 +12,8 @@ export const DefaultState = {
   minimumTime: 1,
   username: '',
   users: [],
-  results: { }
+  results: { },
+  happinessLevel: 0
 };
 
 function getCategoryTimes(totalTime, categories) {
@@ -111,6 +112,13 @@ export default function (state = DefaultState, action) {
     case Activity.RetroResults:
       hashHistory.push('/retro-results');
       return updeep({ results: action.value }, state);
+
+    case Retro.SetHappinessLevel:
+      return updeep({ happinessLevel: action.value }, state);
+
+    case Activity.CollectHappiness:
+      socket().emit(messages.retro.submitHappiness, state.happinessLevel);
+      return state;
 
     default:
       return state;

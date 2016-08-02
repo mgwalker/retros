@@ -17,6 +17,8 @@ export const Activity = {
   CollectVotes: 'collect votes',
   VoteUp: 'vote up',
   VoteDown: 'vote down',
+  StartHappiness: 'start happiness',
+  CollectHappiness: 'collect happiness',
   RetroResults: 'retro results',
 
   createRetro() {
@@ -59,6 +61,14 @@ export const Activity = {
     return { type: Activity.VoteDown, value: index };
   },
 
+  startHappiness() {
+    return { type: Activity.StartHappiness };
+  },
+
+  collectHappiness() {
+    return { type: Activity.CollectHappiness };
+  },
+
   retroResults(results) {
     return { type: Activity.RetroResults, value: results };
   }
@@ -73,6 +83,7 @@ export const Retro = {
   SetUsername: 'set username of retro user',
   AddUser: 'add user to retro',
   StartRetro: 'start the retro',
+  SetHappinessLevel: 'set happiness level',
 
   setRetroCategories(retroCategories) {
     return { type: Retro.SetRetroCategories, value: retroCategories };
@@ -104,5 +115,9 @@ export const Retro = {
 
   startRetro() {
     return { type: Retro.StartRetro };
+  },
+
+  setHappinessLevel(level) {
+    return { type: Retro.SetHappinessLevel, value: level };
   }
 };
