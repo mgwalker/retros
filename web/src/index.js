@@ -20,7 +20,7 @@ ReactDOM.render(
       <Route path="/" component={CreateRetro} />
       <Route path="/set-retro-properties" component={GetRetroProperties} />
       <Route path="/enable-retro-happiness" component={EnableRetroHappiness} />
-      <Route path="/retro" component={DoRetro} />
+      <Route path="/retro/:retroID" component={DoRetro} />
       <Route path="/retro-running" component={RunRetro} />
       <Route path="/retro-happiness" component={GetHappiness} />
       <Route path="/retro-results" component={RetroResults} />

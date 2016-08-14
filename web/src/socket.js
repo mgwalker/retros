@@ -73,7 +73,7 @@ function subscribeSocketToEventHandlers(skt) {
 
 let socket;
 
-const channelNameHash = /#([A-Za-z0-9-]+)/.exec(window.location.hash);
+const channelNameHash = /\/retro\/([A-Za-z0-9-]+)\/?/.exec(window.location.pathname);
 if (channelNameHash) {
   socket = io(`/${channelNameHash[1]}`);
   subscribeSocketToEventHandlers(socket);
@@ -90,7 +90,7 @@ socket.on(socketMessages.action.joinChannel, msg => {
   });
 
   socket.on(socketMessages.action.waitForStart, () => {
-    browserHistory.push(`/retro/#${msg.channel}`);
+    browserHistory.push(`/retro/${msg.channel}`);
   });
 
   subscribeSocketToEventHandlers(socket);
