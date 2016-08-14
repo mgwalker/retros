@@ -49,7 +49,7 @@ class RetroRunner {
 
   startPolling(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit(messages.retro.polling, category);
+    this.socket.emit(messages.retro.polling, { category, time: delays.poll });
     console.log(`Polling: ${category}`);
     setTimeout(() => this.tenSecondWarning(), delays.poll - 10000);
     setTimeout(() => this.collectAnswers(delays), delays.poll);
@@ -65,7 +65,7 @@ class RetroRunner {
 
   startVoting(delays) {
     const category = this.getCurrentCategory();
-    this.socket.emit(messages.retro.voting, { category, entries: shuffle(this.answers) });
+    this.socket.emit(messages.retro.voting, { category, entries: shuffle(this.answers), time: delays.vote });
     console.log(`Voting: ${category}`);
     setTimeout(() => this.tenSecondWarning(), delays.vote - 10000);
     setTimeout(() => this.collectVotes(), delays.vote);
