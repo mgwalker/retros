@@ -1,5 +1,7 @@
 const messages = require('./messages');
 
+const collectionTime = 1000;
+
 function shuffle(list) {
   const result = [].concat(list);
   for (let i = 0; i < result.length; i++) {
@@ -60,7 +62,7 @@ class RetroRunner {
     this.answers.length = 0;
     this.socket.emit(messages.retro.collectAnswers, category);
     console.log(`Collecting answers: ${category}`);
-    setTimeout(() => this.startVoting(delays), 3000);
+    setTimeout(() => this.startVoting(delays), collectionTime);
   }
 
   startVoting(delays) {
@@ -75,7 +77,7 @@ class RetroRunner {
     const category = this.getCurrentCategory();
     this.socket.emit(messages.retro.collectVotes, category);
     console.log(`Collecting votes: ${category}`);
-    setTimeout(() => this.nextCategory(), 3000);
+    setTimeout(() => this.nextCategory(), collectionTime);
   }
 
   tenSecondWarning() {
@@ -106,7 +108,7 @@ class RetroRunner {
   collectHappiness() {
     this.socket.emit(messages.retro.collectHappiness);
     console.log('Collecting happiness');
-    setTimeout(() => this.sendResults(), 3000);
+    setTimeout(() => this.sendResults(), collectionTime);
   }
 
   sendResults() {
