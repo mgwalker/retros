@@ -19,12 +19,11 @@ class DoRetro extends React.Component {
 
   getOwnerBlock() {
     if (this.props.owner) {
-      const url = window.location.href.substr(0, window.location.href.indexOf('?'));
       return (
         <div className="usa-grid retro-owner-block">
           <div className="usa-width-one-half desc">
             Share this link with your retro participants so they can
-            join: <a href={url}>{url}</a>
+            join: <a href={window.location.href}>{window.location.href}</a>
           </div>
           <div className="usa-width-one-half btn">
             <button onClick={this.props.onStartRetro}>Start the Retro</button>
