@@ -2411,6 +2411,11 @@ h1, h2, h3, h4, h5, h6 {
   .happiness-meter > button > span {
     font-size: 120px; }
 
+.retro-countdown-timer {
+  text-align: center;
+  font-size: 10em;
+  font-weight: bold; }
+
 .enable-retro-happiness-prompt .happiness-meter {
   border: 1px solid black;
   padding: 1em; }

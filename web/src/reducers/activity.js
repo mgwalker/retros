@@ -5,6 +5,7 @@ import store from '../store';
 import socket, { messages } from '../socket';
 
 export const DefaultState = {
+  timeBeforeStart: 0,
   time: {
     durationRemaining: 0,
     pctElapsed: 0
@@ -29,7 +30,7 @@ export default function (state = DefaultState, action) {
 
     case Activity.StartRetro:
       hashHistory.push('/retro-running');
-      return state;
+      return updeep({ timeBeforeStart: action.value }, state);
 
     case Activity.StartPolling:
       console.log(`Activity.StartPolling: ${action.value}`);

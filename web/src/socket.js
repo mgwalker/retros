@@ -22,8 +22,18 @@ function subscribeSocketToEventHandlers(skt) {
     store.dispatch(Retro.addUser(username));
   });
 
-  skt.on(socketMessages.retro.starting, () => {
-    store.dispatch(Activity.startRetro());
+  skt.on(socketMessages.retro.starting, (delay) => {
+    store.dispatch(Activity.startRetro(delay));
+
+    const timerStart = new Date();
+    const countdown = setInterval(() => {
+      const elapsed = Math.round(((new Date()) - timerStart) / 1000);
+      if (elapsed < delay) {
+        store.dispatch(Activity.startRetro(delay - elapsed));
+      } else {
+        clearInterval(countdown);
+      }
+    }, 250);
   });
 
   skt.on(socketMessages.retro.polling, msg => {

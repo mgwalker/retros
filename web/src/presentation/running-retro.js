@@ -1,5 +1,17 @@
 import React from 'react';
 
+function getCountdownToStart(isPolling, isVoting, timeBeforeStart) {
+  if (!isPolling && !isVoting) {
+    return (
+      <div>
+        <h1>Retro Starting in...</h1>
+        <div className="retro-countdown-timer">{timeBeforeStart}</div>
+      </div>
+    );
+  }
+  return null;
+}
+
 function getPollingBlock(polling, entries, editHandler) {
   if (polling) {
     const entriesDOM = [];
@@ -58,6 +70,7 @@ function getTimeBlock(time) {
 function runningRetro(props) {
   return (
     <div className="usa-grid">
+      {getCountdownToStart(props.polling, props.voting, props.timeBeforeStart)}
       {getPollingBlock(props.polling, props.entries, props.editEntry)}
       {getVotingBlock(props.voting, props.entries, props.voteUp, props.voteDown)}
       {getTimeBlock(props.time)}
@@ -72,7 +85,8 @@ runningRetro.propTypes = {
   editEntry: React.PropTypes.func.isRequired,
   voteUp: React.PropTypes.func.isRequired,
   voteDown: React.PropTypes.func.isRequired,
-  time: React.PropTypes.object
+  time: React.PropTypes.object,
+timeBeforeStart: React.PropTypes.number
 };
 
 export default runningRetro;
