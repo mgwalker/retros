@@ -1,7 +1,7 @@
 /* global io */
 import store from './store';
 import { Activity, Owner, Retro } from './actions';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import socketMessages from '../../server/messages';
 
 function subscribeSocketToEventHandlers(skt) {
@@ -81,7 +81,7 @@ socket.on(socketMessages.action.joinChannel, msg => {
   });
 
   socket.on(socketMessages.action.waitForStart, () => {
-    hashHistory.push(`/retro/${msg.channel}`);
+    browserHistory.push(`/retro/${msg.channel}`);
   });
 
   subscribeSocketToEventHandlers(socket);

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import Presentation from '../presentation/get-retro-properties';
 
 import { Retro } from '../actions';
@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
       };
     },
     acceptProperties() {
-      hashHistory.push('/enable-retro-happiness');
+      browserHistory.push('/enable-retro-happiness');
     }
   };
 }

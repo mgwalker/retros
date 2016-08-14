@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 import store from './store';
 
 require('clipboard');
@@ -16,7 +16,7 @@ import RetroResults from './containers/retro-results';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={browserHistory}>
       <Route path="/" component={CreateRetro} />
       <Route path="/set-retro-properties" component={GetRetroProperties} />
       <Route path="/enable-retro-happiness" component={EnableRetroHappiness} />

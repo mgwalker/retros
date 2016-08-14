@@ -1,5 +1,5 @@
 import updeep from 'updeep';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { Activity } from '../actions';
 import store from '../store';
 import socket, { messages } from '../socket';
@@ -25,7 +25,7 @@ export default function (state = DefaultState, action) {
       }
 
     case Activity.StartRetro:
-      hashHistory.push('/retro-running');
+      browserHistory.push('/retro-running');
       return state;
 
     case Activity.StartPolling:
@@ -97,7 +97,7 @@ export default function (state = DefaultState, action) {
 
     case Activity.StartHappiness:
       console.log('Activity.StartHappiness');
-      hashHistory.push('/retro-happiness');
+      browserHistory.push('/retro-happiness');
       return state;
 
     default:
