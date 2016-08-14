@@ -60,9 +60,9 @@ function getVotingBlock(voting, entries, voteUp, voteDown) {
   return null;
 }
 
-function getTimeWarningBlock(timeWarning) {
-  if (timeWarning > 0) {
-    return (<div style={{ position: 'fixed', top: 0, right: 0, backgroundColor: 'red' }}>{timeWarning} seconds remaining</div>);
+function getTimeBlock(time) {
+  if (time.durationRemaining > 0) {
+    return (<div style={{ position: 'fixed', top: 0, right: 0, backgroundColor: 'red' }}>{time.durationRemaining} seconds remaining</div>);
   }
   return null;
 }
@@ -73,7 +73,7 @@ function runningRetro(props) {
       {getCountdownToStart(props.polling, props.voting, props.timeBeforeStart)}
       {getPollingBlock(props.polling, props.entries, props.editEntry)}
       {getVotingBlock(props.voting, props.entries, props.voteUp, props.voteDown)}
-      {getTimeWarningBlock(props.timeWarning)}
+      {getTimeBlock(props.time)}
     </div>
   );
 }
@@ -85,8 +85,8 @@ runningRetro.propTypes = {
   editEntry: React.PropTypes.func.isRequired,
   voteUp: React.PropTypes.func.isRequired,
   voteDown: React.PropTypes.func.isRequired,
-  timeWarning: React.PropTypes.number,
-  timeBeforeStart: React.PropTypes.number
+  time: React.PropTypes.object,
+timeBeforeStart: React.PropTypes.number
 };
 
 export default runningRetro;
