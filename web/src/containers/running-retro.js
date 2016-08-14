@@ -7,7 +7,8 @@ function mapStateToProps(state) {
     polling: state.activity.polling,
     voting: state.activity.voting,
     timeWarning: state.activity.timeWarning,
-    entries: state.activity.entries
+    entries: state.activity.entries,
+    timeBeforeStart: state.activity.timeBeforeStart
   };
 }
 

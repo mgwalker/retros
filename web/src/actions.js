@@ -25,8 +25,8 @@ export const Activity = {
     return { type: Activity.CreateRetro };
   },
 
-  startRetro() {
-    return { type: Activity.StartRetro };
+  startRetro(delay) {
+    return { type: Activity.StartRetro, value: delay };
   },
 
   startPolling(category) {
