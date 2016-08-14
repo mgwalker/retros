@@ -1,5 +1,17 @@
 import React from 'react';
 
+function getCountdownToStart(isPolling, isVoting, timeBeforeStart) {
+  if (!isPolling && !isVoting) {
+    return (
+      <div>
+        <h1>Retro Starting in...</h1>
+        <div className="retro-countdown-timer">{timeBeforeStart}</div>
+      </div>
+    );
+  }
+  return null;
+}
+
 function getPollingBlock(polling, entries, editHandler) {
   if (polling) {
     const entriesDOM = [];
@@ -48,9 +60,9 @@ function getVotingBlock(voting, entries, voteUp, voteDown) {
   return null;
 }
 
-function getTimeWarningBlock(timeWarning) {
-  if (timeWarning > 0) {
-    return (<div style={{ position: 'fixed', top: 0, right: 0, backgroundColor: 'red' }}>{timeWarning} seconds remaining</div>);
+function getTimeBlock(time) {
+  if (time.durationRemaining > 0) {
+    return (<div style={{ position: 'fixed', top: 0, right: 0, backgroundColor: 'red' }}>{time.durationRemaining} seconds remaining</div>);
   }
   return null;
 }
@@ -58,9 +70,10 @@ function getTimeWarningBlock(timeWarning) {
 function runningRetro(props) {
   return (
     <div className="usa-grid">
+      {getCountdownToStart(props.polling, props.voting, props.timeBeforeStart)}
       {getPollingBlock(props.polling, props.entries, props.editEntry)}
       {getVotingBlock(props.voting, props.entries, props.voteUp, props.voteDown)}
-      {getTimeWarningBlock(props.timeWarning)}
+      {getTimeBlock(props.time)}
     </div>
   );
 }
@@ -72,7 +85,8 @@ runningRetro.propTypes = {
   editEntry: React.PropTypes.func.isRequired,
   voteUp: React.PropTypes.func.isRequired,
   voteDown: React.PropTypes.func.isRequired,
-  timeWarning: React.PropTypes.number
+  time: React.PropTypes.object,
+timeBeforeStart: React.PropTypes.number
 };
 
 export default runningRetro;

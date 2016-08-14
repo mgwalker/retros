@@ -25,8 +25,8 @@ export const Activity = {
     return { type: Activity.CreateRetro };
   },
 
-  startRetro() {
-    return { type: Activity.StartRetro };
+  startRetro(delay) {
+    return { type: Activity.StartRetro, value: delay };
   },
 
   startPolling(category) {
@@ -37,8 +37,8 @@ export const Activity = {
     return { type: Activity.StartVoting, value: { category, entries } };
   },
 
-  timeWarning(duration) {
-    return { type: Activity.TimeWarning, value: duration };
+  timeWarning(durationRemaining, pctElapsed) {
+    return { type: Activity.TimeWarning, value: { durationRemaining, pctElapsed } };
   },
 
   setPollEntry(index, value) {
