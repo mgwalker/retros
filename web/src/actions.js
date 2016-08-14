@@ -37,8 +37,8 @@ export const Activity = {
     return { type: Activity.StartVoting, value: { category, entries } };
   },
 
-  timeWarning(duration) {
-    return { type: Activity.TimeWarning, value: duration };
+  timeWarning(durationRemaining, pctElapsed) {
+    return { type: Activity.TimeWarning, value: { durationRemaining, pctElapsed } };
   },
 
   setPollEntry(index, value) {
