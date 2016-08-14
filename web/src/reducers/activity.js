@@ -5,7 +5,10 @@ import store from '../store';
 import socket, { messages } from '../socket';
 
 export const DefaultState = {
-  timeWarning: 0,
+  time: {
+    durationRemaining: 0,
+    pctElapsed: 0
+  },
   polling: '',
   voting: '',
   entries: []
@@ -47,7 +50,10 @@ export default function (state = DefaultState, action) {
       }, state);
 
     case Activity.TimeWarning:
-      return updeep({ timeWarning: action.value }, state);
+      return updeep({ time: {
+        durationRemaining: action.value.durationRemaining,
+        pctElapsed: action.value.pctElapsed
+      } }, state);
 
     case Activity.SetPollEntry:
       {

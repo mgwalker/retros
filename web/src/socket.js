@@ -4,6 +4,19 @@ import { Activity, Owner, Retro } from './actions';
 import { hashHistory } from 'react-router';
 import socketMessages from '../../server/messages';
 
+function runForDuration(actionFn, duration) {
+  store.dispatch(Activity.timeWarning(duration));
+  const timerStart = new Date();
+  const countdown = setInterval(() => {
+    const elapsed = Math.round(((new Date()) - timerStart));
+    if (elapsed < duration) {
+      store.dispatch(Activity.timeWarning(Math.round((duration - elapsed) / 1000), (elapsed / duration)));
+    } else {
+      clearInterval(countdown);
+    }
+  }, 250);
+}
+
 function subscribeSocketToEventHandlers(skt) {
   skt.on('add user', username => {
     store.dispatch(Retro.addUser(username));
@@ -13,30 +26,16 @@ function subscribeSocketToEventHandlers(skt) {
     store.dispatch(Activity.startRetro());
   });
 
-  skt.on(socketMessages.retro.polling, category => {
-    console.log(`Polling for ${category}`);
-    store.dispatch(Activity.startPolling(category));
+  skt.on(socketMessages.retro.polling, msg => {
+    console.log(`Polling for ${msg.category}`);
+    store.dispatch(Activity.startPolling(msg.category));
+    runForDuration(Activity.timeWarning, msg.time);
   });
 
   skt.on(socketMessages.retro.voting, msg => {
     console.log(`Voting for ${msg.category}`);
     store.dispatch(Activity.startVoting(msg.category, msg.entries));
-  });
-
-  skt.on(socketMessages.retro.tenSecondWarning, () => {
-    console.log('10-second warning!');
-    const warningTime = 10;
-    store.dispatch(Activity.timeWarning(warningTime));
-
-    const timerStart = new Date();
-    const countdown = setInterval(() => {
-      const elapsed = Math.round(((new Date()) - timerStart) / 1000);
-      if (elapsed < 10) {
-        store.dispatch(Activity.timeWarning(warningTime - elapsed));
-      } else {
-        clearInterval(countdown);
-      }
-    }, 250);
+    runForDuration(Activity.timeWarning, msg.time);
   });
 
   skt.on(socketMessages.retro.collectAnswers, () => {
