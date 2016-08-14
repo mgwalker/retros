@@ -2411,6 +2411,19 @@ h1, h2, h3, h4, h5, h6 {
   .happiness-meter > button > span {
     font-size: 120px; }
 
+.retro-running-layout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; }
+  .retro-running-layout .timer-container {
+    float: right;
+    padding: 0 1em; }
+    .retro-running-layout .timer-container .timer-countdown-bar {
+      height: 1em;
+      background-color: #3C3;
+      border-radius: 0.5em; }
+
 .retro-countdown-timer {
   text-align: center;
   font-size: 10em;

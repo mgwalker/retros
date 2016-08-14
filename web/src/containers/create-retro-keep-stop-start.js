@@ -12,7 +12,7 @@ function mapDispatchToProps(dispatch) {
   return {
     launch() {
       dispatch(Retro.setRetroCategories(['Keep Doing', 'Stop Doing', 'Start Doing']));
-      browserHistory.push('/set-retro-properties');
+      browserHistory.push('/setup/properties');
     }
   };
 }

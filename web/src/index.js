@@ -4,26 +4,27 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import store from './store';
 
-require('clipboard');
-
 import CreateRetro from './presentation/create-retro';
 import GetRetroProperties from './containers/get-retro-properties';
 import EnableRetroHappiness from './containers/enable-retro-happiness';
-import DoRetro from './containers/do-retro';
-import RunRetro from './containers/running-retro';
-import GetHappiness from './containers/happiness-meter';
-import RetroResults from './containers/retro-results';
+import * as RunningRetro from './containers/running';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={CreateRetro} />
-      <Route path="/set-retro-properties" component={GetRetroProperties} />
-      <Route path="/enable-retro-happiness" component={EnableRetroHappiness} />
-      <Route path="/retro/:retroID" component={DoRetro} />
-      <Route path="/retro-running" component={RunRetro} />
-      <Route path="/retro-happiness" component={GetHappiness} />
-      <Route path="/retro-results" component={RetroResults} />
+      <Route path="/setup">
+        <Route path="properties" component={GetRetroProperties} />
+        <Route path="happiness" component={EnableRetroHappiness} />
+      </Route>
+      <Route path="/retro/lobby/:retroID" component={RunningRetro.Lobby} />
+      <Route path="/retro/get-ready" component={RunningRetro.GetReady} />
+      <Route path="/retro/" component={RunningRetro.Layout}>
+        <Route path="polling" component={RunningRetro.Polling} />
+        <Route path="voting" component={RunningRetro.Voting} />
+        <Route path="happiness" component={RunningRetro.Happiness} />
+      </Route>
+      <Route path="/retro/results" component={RunningRetro.Results} />
     </Router>
   </Provider>,
   document.getElementById('content')

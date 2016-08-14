@@ -110,7 +110,7 @@ export default function (state = DefaultState, action) {
       return state;
 
     case Activity.RetroResults:
-      browserHistory.push('/retro-results');
+      browserHistory.push('/retro/results');
       return updeep({ results: action.value }, state);
 
     case Retro.SetHappinessLevel:

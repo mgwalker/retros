@@ -24,7 +24,7 @@ function mapDispatchToProps(dispatch) {
       };
     },
     acceptProperties() {
-      browserHistory.push('/enable-retro-happiness');
+      browserHistory.push('/setup/happiness/');
     }
   };
 }

@@ -29,7 +29,7 @@ export default function (state = DefaultState, action) {
       }
 
     case Activity.StartRetro:
-      browserHistory.push('/retro-running');
+      browserHistory.push('/retro/get-ready');
       return updeep({ timeBeforeStart: action.value }, state);
 
     case Activity.StartPolling:
@@ -104,7 +104,7 @@ export default function (state = DefaultState, action) {
 
     case Activity.StartHappiness:
       console.log('Activity.StartHappiness');
-      browserHistory.push('/retro-happiness');
+      browserHistory.push('/retro/happiness');
       return state;
 
     default:

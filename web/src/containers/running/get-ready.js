@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
-import Presentation from '../presentation/retro-results';
-
+import Presentation from '../../presentation/running/get-ready';
 
 function mapStateToProps(state) {
-  return { results: state.retro.results };
+  return {
+    timeBeforeStart: state.activity.timeBeforeStart
+  };
 }
 
 function mapDispatchToProps() {

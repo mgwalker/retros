@@ -5,7 +5,7 @@ import { browserHistory } from 'react-router';
 import socketMessages from '../../server/messages';
 
 function runForDuration(actionFn, duration) {
-  store.dispatch(Activity.timeWarning(duration));
+  store.dispatch(Activity.timeWarning(Math.round(duration / 1000), 0));
   const timerStart = new Date();
   const countdown = setInterval(() => {
     const elapsed = Math.round(((new Date()) - timerStart));
@@ -40,12 +40,14 @@ function subscribeSocketToEventHandlers(skt) {
     console.log(`Polling for ${msg.category}`);
     store.dispatch(Activity.startPolling(msg.category));
     runForDuration(Activity.timeWarning, msg.time);
+    browserHistory.push('/retro/polling');
   });
 
   skt.on(socketMessages.retro.voting, msg => {
     console.log(`Voting for ${msg.category}`);
     store.dispatch(Activity.startVoting(msg.category, msg.entries));
     runForDuration(Activity.timeWarning, msg.time);
+    browserHistory.push('/retro/voting');
   });
 
   skt.on(socketMessages.retro.collectAnswers, () => {
@@ -64,6 +66,7 @@ function subscribeSocketToEventHandlers(skt) {
   skt.on(socketMessages.retro.collectHappiness, () => {
     console.log('Asked to submit happiness');
     store.dispatch(Activity.collectHappiness());
+    browserHistory.push('/retro/happiness');
   });
 
   skt.on(socketMessages.retro.results, results => {
@@ -73,7 +76,7 @@ function subscribeSocketToEventHandlers(skt) {
 
 let socket;
 
-const channelNameHash = /\/retro\/([A-Za-z0-9-]+)\/?/.exec(window.location.pathname);
+const channelNameHash = /\/retro\/lobby\/([A-Za-z0-9-]+)/.exec(window.location.pathname);
 if (channelNameHash) {
   socket = io(`/${channelNameHash[1]}`);
   subscribeSocketToEventHandlers(socket);
@@ -90,7 +93,7 @@ socket.on(socketMessages.action.joinChannel, msg => {
   });
 
   socket.on(socketMessages.action.waitForStart, () => {
-    browserHistory.push(`/retro/${msg.channel}`);
+    browserHistory.push(`/retro/lobby/${msg.channel}`);
   });
 
   subscribeSocketToEventHandlers(socket);
