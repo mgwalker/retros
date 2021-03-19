@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import Presentation from '../presentation/happiness-meter';
+import Presentation from '../../presentation/happiness-meter';
 
-import { Retro } from '../actions';
+import { Retro } from '../../actions';
 
 function mapStateToProps(state) {
   return {

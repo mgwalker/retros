@@ -1,6 +1,7 @@
 'use strict';
 
 const PORT = process.env.PORT || 23526;
+const fs = require('fs');
 const restify = require('restify');
 const shortid = require('shortid');
 const uuid = require('uuid');
@@ -29,6 +30,17 @@ server.get('/.*', restify.serveStatic({
   directory: 'web/bin',
   default: 'index.html'
 }));
+
+server.on('ResourceNotFound', (req, res, err, next) => {
+  const index = fs.readFileSync('web/bin/index.html', { encoding: 'utf-8' });
+  res.writeHead(200, {
+    'Content-Type': 'text/html',
+    'Content-Length': index.length
+  });
+  res.write(index);
+  res.end();
+  next();
+});
 
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);

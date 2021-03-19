@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import Presentation from '../presentation/create-retro-like-wish-if';
 
 import { Retro } from '../actions';
@@ -12,7 +12,7 @@ function mapDispatchToProps(dispatch) {
   return {
     launch() {
       dispatch(Retro.setRetroCategories(['I Like', 'I wish', 'What If']));
-      hashHistory.push('/set-retro-properties');
+      browserHistory.push('/setup/properties');
     }
   };
 }

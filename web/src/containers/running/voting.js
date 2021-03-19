@@ -1,25 +1,16 @@
 import { connect } from 'react-redux';
-import Presentation from '../presentation/running-retro';
-import { Activity } from '../actions';
+import Presentation from '../../presentation/running/voting';
+import { Activity } from '../../actions';
 
 function mapStateToProps(state) {
   return {
-    polling: state.activity.polling,
     voting: state.activity.voting,
-    time: state.activity.time,
-    entries: state.activity.entries,
-    timeBeforeStart: state.activity.timeBeforeStart
+    entries: state.activity.entries
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    editEntry(index) {
-      return event => {
-        dispatch(Activity.setPollEntry(index, event.target.value));
-      };
-    },
-
     voteUp(index) {
       return () => {
         dispatch(Activity.voteUp(index));

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import Presentation from '../presentation/do-retro';
+import Presentation from '../../presentation/do-retro';
 
-import { Retro } from '../actions';
+import { Retro } from '../../actions';
 
 function mapStateToProps(state) {
   return {

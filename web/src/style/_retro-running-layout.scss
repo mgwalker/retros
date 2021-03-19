@@ -1,0 +1,17 @@
+.retro-running-layout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .timer-container {
+    float: right;
+    padding: 0 1em;
+
+    .timer-countdown-bar {
+      height: 1em;
+      background-color: #3C3;
+      border-radius: 0.5em;
+    }
+  }
+}

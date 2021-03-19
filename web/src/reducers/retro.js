@@ -1,5 +1,5 @@
 import { Retro, Activity } from '../actions';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import updeep from 'updeep';
 import socket, { messages } from '../socket';
 
@@ -110,7 +110,7 @@ export default function (state = DefaultState, action) {
       return state;
 
     case Activity.RetroResults:
-      hashHistory.push('/retro-results');
+      browserHistory.push('/retro/results');
       return updeep({ results: action.value }, state);
 
     case Retro.SetHappinessLevel:

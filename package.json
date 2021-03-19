@@ -18,7 +18,6 @@
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
-    "clipboard": "^1.5.12",
     "eslint": "^3.0.1",
     "eslint-config-airbnb": "^9.0.1",
     "eslint-plugin-import": "^1.10.2",
@@ -44,7 +43,7 @@
     "copy-uswds": "cp node_modules/uswds/dist/js/uswds.js ./web/bin/uswds.js",
     "postinstall": "npm run copy-fonts && npm run copy-images && npm run copy-uswds",
     "build": "npm run copy-fonts && npm run copy-images && npm run build-style && npm run build-html",
-    "watch-style": "node-sass -w web/src/style/main.scss -o web/bin --include-path `node sass-paths.js`",
+    "watch-style": "node-sass -w web/src/style/ -o web/bin --include-path `node sass-paths.js`",
     "watch-js": "watchify -v -d -t [ babelify --presets [ react es2015 ] ] web/src/index.js -o web/bin/bundle.js",
     "watch": "npm run watch-js & npm run watch-style && fg"
   },
